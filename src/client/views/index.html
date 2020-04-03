@@ -16,22 +16,20 @@
     <main>
         <!-- user input -->
         <section>
-            <form onsubmit="return Client.handleSubmit(event)">
+            <form>
                 <input id="userText" type="text" name="input" placeholder="Enter your text to classify" required>
-                <input type="submit" name="submit" value="Submit" onsubmit="return Client.handleSubmit(event)" onclick="return Client.handleSubmit(event)">
+                <input type="submit" name="submit" id="submitForm" value="Submit">
             </form>
             <div id="errorMessage" class="hidden"></div>
         </section>
 
         <!-- result for the user-->
         <section>
-            
+
         </section>
     </main>
 
     <!-- footer of the page -->
     <footer>Hope you found what you wanted.</footer>
-
-    <script src="app.js" type="text/javascript"></script>
 </body>
 </html>
