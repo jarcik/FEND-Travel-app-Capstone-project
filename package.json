@@ -1,0 +1,38 @@
+{
+  "name": "fend-travel-app-capstone-project",
+  "version": "1.0.0",
+  "description": "Final project of Udacity FEND Nanodegree program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/server/index.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server  --config webpack.dev.js --open  "
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "experss": "0.0.1-security",
+    "express": "^4.17.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.2.7",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "webpack-dev-server": "^3.10.3",
+    "workbox-webpack-plugin": "^5.1.2"
+  }
+}

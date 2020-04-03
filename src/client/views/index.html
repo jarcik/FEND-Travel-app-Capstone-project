@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travel app</title>
+</head>
+<body>
+    <!-- header of the page -->
+    <header>
+        <h1>TravelApp</h1>
+    </header>
+
+    <!-- main part of the page -->
+    <main>
+        <!-- user input -->
+        <section>
+            <form onsubmit="return Client.handleSubmit(event)">
+                <input id="userText" type="text" name="input" placeholder="Enter your text to classify" required>
+                <input type="submit" name="submit" value="Submit" onsubmit="return Client.handleSubmit(event)" onclick="return Client.handleSubmit(event)">
+            </form>
+            <div id="errorMessage" class="hidden"></div>
+        </section>
+
+        <!-- result for the user-->
+        <section>
+            
+        </section>
+    </main>
+
+    <!-- footer of the page -->
+    <footer>Hope you found what you wanted.</footer>
+
+    <script src="app.js" type="text/javascript"></script>
+</body>
+</html>
