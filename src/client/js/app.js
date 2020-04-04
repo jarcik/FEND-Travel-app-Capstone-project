@@ -156,16 +156,25 @@ const updateUI = async () => {
         //wait for all data from server
         const allData = await request.json();
         console.log(allData);
+
         //fill the UI with user data
-        document.getElementById('city').innerHTML = `City name: ${allData.cityName}`;
-        document.getElementById('date').innerHTML = `Trip date: ${allData.tripDate}`;
-        document.getElementById('country').innerHTML = `Country: ${allData.country}`;
+
+        document.getElementById('tripCard').classList.remove('hidden');
+
+        //image
         if(allData.imageUrl) {
             document.getElementById('tripImage').setAttribute('src', allData.imageUrl);
+            document.getElementById('tripImage').classList.remove('hidden');
         } else {            
             document.getElementById('tripImage').classList.add('hidden');
         }
-        document.getElementById('obj').innerHTML = JSON.stringify(allData);
+        //heading of the trip
+        document.getElementById('tripHeading').innerHTML = `Travel to: ${allData.cityName}, ${allData.country}`;
+        document.getElementById('departureDate').innerHTML = `DepartureDate date: ${allData.tripDate}`;
+        document.getElementById('tempHigh').innerHTML = `Temperature high: ${allData.max_temp}`;
+        document.getElementById('tempLow').innerHTML = `Temperature low: ${allData.min_temp}`;
+        document.getElementById('weatherIcon').setAttribute('src', `https://www.weatherbit.io/static/img/icons/${allData.weatherIcon}.png`);
+        document.getElementById('weatherText').innerHTML = `${allData.weatherDesc}`;
 
     } catch (error) {
         console.log('update UI error: ', error);

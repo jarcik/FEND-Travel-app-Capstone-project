@@ -25,12 +25,17 @@
         </section>
 
         <!-- result for the user-->
-        <section>
-            <div id="city"></div>
-            <div id="country"></div>
-            <div id="date"></div>
-            <img id="tripImage" src="" width="300" />
-            <div id="obj"></div>
+        <section id="tripCard" class="card hidden">
+            <img id="tripImage" class="hidden" src="" width="300" />
+            <div id="tripHeading"></div>
+            <div id="departureDate"></div>
+            <div id="weather">
+                Typical weather for the trip date:
+                <div id="tempHigh"></div>
+                <div id="tempLow"></div>
+                <img id="weatherIcon" src="" width="50" height="50" />
+                <div id="weatherText"></div>
+            </div>
         </section>
     </main>
 
