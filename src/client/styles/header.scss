@@ -1,0 +1,13 @@
+$background_color: darkslateblue;
+$font-color: white;
+$section_padding: 30px;
+$heading_font_size: 20px;
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: $section_padding;
+    background-color: $background_color;
+    color: $font-color;
+    font-size: $heading_font_size;
+}

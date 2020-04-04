@@ -113,29 +113,6 @@ const postGeoData = async (url = '', data = {}) => {
     }
 }
 
-//post recieved and user data to server
-const postWeatherData = async (url = '', data = {}) => {
-    //body of the response
-    const response = await fetch(getEnvLocalUrl()+url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-        })   
-    });
-
-    try {
-        //wait for data from server
-        const newData = await response.json();
-        console.log(newData);
-        return newData;
-    } catch (error) {
-        console.log('postData error: ', error);
-        errorHandling('There was and error. Please, try it again.');
-    }
-}
 
 /* APP functions */
 
@@ -154,8 +131,6 @@ const handleSubmit = event => {
     //plus one because weather count even today
     let howManyDays = Math.round(differenceDays(new Date(), new Date(tripDate))) + 1;
     console.log(howManyDays);
-    //country
-    let country = '';
 
     //check for empty inputs
     if(!cityName) {
@@ -167,24 +142,17 @@ const handleSubmit = event => {
         return;
     }
 
-    let geoData = {};
-    let weatherData = {};
-    let pixabayData = {};
-
     //get getGeoNames
     getGeoNames(cityName)
         //get weather info
         .then(function (gData) {
-            geoData = gData;
             if(gData && gData.totalResultsCount && gData.totalResultsCount > 0 && gData.geonames[0]){
                 getWeatherBit(howManyDays, gData.geonames[0].lat, gData.geonames[0].lng)
                 .then(function (wData) {
-                    weatherData = wData;
                     if(wData && wData.data) {
                         getPixabay(gData.geonames[0].name + '+' + gData.geonames[0].countryName)
                         //post data to server
-                        .then(function (pData) {   
-                            pixabayData = pData;        
+                        .then(function (pData) {     
                             let postData = {
                                 latitude: wData.lat,
                                 longitude: wData.lon,
