@@ -201,6 +201,7 @@ const init = () => {
     //set max date value for today (weather api has only 16day forecast)
     dateInput.setAttribute('max', getCurrentDate(16));
 
+    //get data from local storage
     let tripData = localStorage.getItem('tripData');
     if(tripData) {
         updateUI(JSON.parse(tripData));
