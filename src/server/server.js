@@ -48,6 +48,7 @@ function getTripData(req, res) {
 
 //store project data to server
 function addTripData(req, res) {
+    projectData = {};
     projectData = req.body;
     console.log(projectData);
 }

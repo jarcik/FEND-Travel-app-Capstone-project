@@ -102,6 +102,7 @@ const handleSubmit = event => {
     //how many days from now is trip?
     //plus one because weather count even today
     let howManyDays = Math.round(differenceDays(new Date(), new Date(tripDate))) + 1;
+    if(howManyDays == 0) howManyDays++;
     console.log(howManyDays);
 
     //check for empty inputs
@@ -170,7 +171,7 @@ const updateUI = async () => {
         }
         //heading of the trip
         document.getElementById('tripHeading').innerHTML = `Travel to: ${allData.cityName}, ${allData.country}`;
-        document.getElementById('departureDate').innerHTML = `DepartureDate date: ${allData.tripDate}`;
+        document.getElementById('departureDate').innerHTML = `Departure date: ${allData.tripDate}`;
         document.getElementById('tempHigh').innerHTML = `Temperature high: ${allData.max_temp}`;
         document.getElementById('tempLow').innerHTML = `Temperature low: ${allData.min_temp}`;
         document.getElementById('weatherIcon').setAttribute('src', `https://www.weatherbit.io/static/img/icons/${allData.weatherIcon}.png`);

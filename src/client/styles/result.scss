@@ -1,2 +1,80 @@
 $border_width: 5px;
-$border_color: darkslateblue;
+$border_color: #f05e23;
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);   
+}
+
+#tripDataContainer {
+    display: flex;
+}
+
+#tripInfo {
+    margin: 20px;
+}
+
+#tripHeading {
+    font-size: 30px;
+}
+
+#departureDate {
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+#weather {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.temp {
+    margin-left: 10px;
+    margin-top: 7px;
+}
+
+#weatherInfo {
+    position: relative;
+}
+
+#weatherIcon {
+    vertical-align: middle;
+}
+
+.inline {
+    display: inline;
+}
+
+#tripImage {
+    object-fit: cover;
+    max-width: 500px;
+}
+
+@media(max-width: 960px) {
+    #tripImage {
+        max-width: 400px;
+    }
+}
+@media(max-width: 800px) {
+    #tripImage {
+        max-width: 300px;
+    }
+}
+@media(max-width: 700px) {
+    #tripImage {
+        max-width: 250px;
+    }
+}
+@media(max-width: 600px) {
+    #tripDataContainer {
+        display: block;
+    }
+    #tripImage {
+        max-width: 100%;
+    }
+}

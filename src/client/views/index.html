@@ -14,6 +14,27 @@
 
     <!-- main part of the page -->
     <main>
+        <!-- result for the user-->
+        <section id="tripCard" class="card hidden">
+            <div id="tripDataContainer">
+                <img id="tripImage" class="hidden" src="" />
+                <div id="tripInfo">
+                    <div id="tripHeading"></div>
+                    <div id="departureDate"></div>
+                    
+                    <div id="weather">
+                        Typical weather for the trip date:
+                        <div id="tempHigh" class="temp"></div>
+                        <div id="tempLow" class="temp"></div>
+                        <div id="weatherInfo">
+                            <img id="weatherIcon" class="inline" src="" width="50" height="50" />
+                            <div id="weatherText" class="inline"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- user input -->
         <section>
             <form>
@@ -22,20 +43,6 @@
                 <input type="submit" name="submit" id="submitForm" value="Submit">
             </form>
             <div id="errorMessage" class="hidden"></div>
-        </section>
-
-        <!-- result for the user-->
-        <section id="tripCard" class="card hidden">
-            <img id="tripImage" class="hidden" src="" width="300" />
-            <div id="tripHeading"></div>
-            <div id="departureDate"></div>
-            <div id="weather">
-                Typical weather for the trip date:
-                <div id="tempHigh"></div>
-                <div id="tempLow"></div>
-                <img id="weatherIcon" src="" width="50" height="50" />
-                <div id="weatherText"></div>
-            </div>
         </section>
     </main>
 
