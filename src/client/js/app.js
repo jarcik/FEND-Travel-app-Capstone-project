@@ -1,39 +1,5 @@
-/* VARIABLES */
-
-/* GeoNames */
-//base url for weather website
-const geoNamesBaseUrl = 'http://api.geonames.org/searchJSON';
-//part for city name
-const geoNamesCityNamePart = '?name=';
-//part for user name
-const geoNamesUserNamePart = '&username=jarcik';
-//static api request part for geoNames website
-let geoNamesApiStaticPart = '&fuzzy=0.8&maxRows=10';
-
-/* WeatherBit */
-//url to weatherbit api
-const weatherBitBaseUrl = 'http://api.weatherbit.io/v2.0/forecast/daily?units=M';
-//api eky to weatherbit API
-const weatherBitApiKeyPart = '&key=b659f19b11674913acac5350a9500b16';
-//part with the date
-const weatherBitDayPart = '&days=';
-//part for the city lattitude
-const weatherBitLatPart = '&lat=';
-//part for the city longitude
-const weatherBitLoPart = '&lon=';
-
-/* Pixabay */
-//pixabay api base url
-const pixabayBaseUrl = 'https://pixabay.com/api/?';
-//pixabay api key
-const pixabayApiKey = 'key=15886612-cbf9c28942d4e277c9fa34531';
-//one image is enought
-const pixabayOneImagePart = '&per_page=3';
-//just an image type
-const pixabayImageTypePart = '&image_type=photo';
-//query part
-const pixabayQueryPart = '&q=';
-
+import { geoNamesApiUrl, weatherBitApiUrl, pixaBayApiUrl } from './apiUrls';
+import { errorHandling, hideErrorMessage, getCurrentDate, differenceDays, getEnvLocalUrl } from './helper';
 
 /* FUNCTIONS */
 
@@ -41,8 +7,10 @@ const pixabayQueryPart = '&q=';
 
 //fetch data from getGeoNames api
 const getGeoNames = async (cityName) => {
+    //get url for request
+    const geoUrl = geoNamesApiUrl(cityName);
     //fetch data from the geo names API
-    const res = await fetch(geoNamesBaseUrl + geoNamesCityNamePart + cityName + geoNamesApiStaticPart + geoNamesUserNamePart);
+    const res = await fetch(geoUrl);
     try {
         //get data from json
         const data = await res.json();
@@ -54,12 +22,14 @@ const getGeoNames = async (cityName) => {
         console.log('getGeoNames error: ', error);
         errorHandling(`There was and error: ${error}`);
     }
-}
+};
 
 //fetch data from WeatherBit api
 const getWeatherBit = async (days, lat, lot) => {
+    //get url for request
+    const weatherUrl = weatherBitApiUrl(days, lat, lot);
     //fetch data from the weather API
-    const res = await fetch(weatherBitBaseUrl + weatherBitApiKeyPart + weatherBitDayPart + days + weatherBitLatPart + lat + weatherBitLoPart + lot);
+    const res = await fetch(weatherUrl);
     try {
         //get data from json
         const data = await res.json();
@@ -71,12 +41,14 @@ const getWeatherBit = async (days, lat, lot) => {
         console.log('getWeatherBit error: ', error);
         errorHandling(`There was and error: ${error}`);
     }
-}
+};
 
 //fetch data from WeatherBit api
 const getPixabay = async (cityCountry) => {
+    //get url for request
+    const pixabayUrl = pixaBayApiUrl(cityCountry);
     //fetch data from the weather API
-    const res = await fetch(pixabayBaseUrl + pixabayApiKey + pixabayImageTypePart + pixabayOneImagePart + pixabayQueryPart + cityCountry);
+    const res = await fetch(pixabayUrl);
     try {
         //get data from json
         const data = await res.json();
@@ -88,10 +60,10 @@ const getPixabay = async (cityCountry) => {
         console.log('getPixabay error: ', error);
         errorHandling(`There was and error: ${error}`);
     }
-}
+};
 
 //post recieved and user data to server
-const postGeoData = async (url = '', data = {}) => {
+const postDataToServer = async (url = '', data = {}) => {
     //body of the response
     const response = await fetch(getEnvLocalUrl()+url, {
         method: 'POST',
@@ -111,7 +83,7 @@ const postGeoData = async (url = '', data = {}) => {
         console.log('postData error: ', error);
         errorHandling('There was and error. Please, try it again.');
     }
-}
+};
 
 
 /* APP functions */
@@ -165,7 +137,7 @@ const handleSubmit = event => {
                                 tripDate: wData.data[wData.data.length - 1].valid_date,
                                 imageUrl: pData.hits[0] ? pData.hits[0].webformatURL : null
                             }; 
-                            postGeoData('/addGeoNamesData', postData);
+                            postDataToServer('/addTripData', postData);
                         })                
                         //update ui
                         .then(updateUI);
@@ -174,7 +146,7 @@ const handleSubmit = event => {
             }
             else errorHandling('Sorry, not found your city. Please enter different one');
         })
-}
+};
 
 //update IU based on recieved data
 const updateUI = async () => {
@@ -199,41 +171,7 @@ const updateUI = async () => {
         console.log('update UI error: ', error);
         errorHandling('There was and error. Please, try it again.');
     }
-}   
-
-//error handling
-const errorHandling = errorMessage => {
-    let errorElement = document.getElementById('errorMessage');
-    errorElement.innerHTML = errorMessage;
-    errorElement.style.display = 'block';
-}
-
-//hide potencially visible error message
-const hideErrorMessage = () => {    
-    let errorElement = document.getElementById('errorMessage');
-    errorElement.innerHTML = '';
-    errorElement.style.display = 'none';
-}
-
-//get current date for the server daata
-const getCurrentDate = (addDate = 0) => {
-    let newDate = new Date().addDays(addDate);
-    let month = newDate.getMonth();
-    if(month < 10) {
-        month = `0${month+1}`;
-    } else month++;
-    let date = newDate.getDate();
-    if(date < 10) date = `0${date}`;
-    return `${newDate.getFullYear()}-${month}-${date}`;
-}
-
-//if webpack-dev-server is runnig, navigate to localhost 8081
-const getEnvLocalUrl = () => {
-    if(process.env.NODE_ENV == 'development') {
-        return 'http://localhost:8081';
-    }
-    return '';
-}
+};   
 
 //initializaton of the app - listeners
 const init = () => {
@@ -251,17 +189,13 @@ const init = () => {
     dateInput.setAttribute('min', getCurrentDate());
     //set max date value for today (weather api has only 16day forecast)
     dateInput.setAttribute('max', getCurrentDate(16));
-}
+};
 
+//add a method addDays for Date prototype
 Date.prototype.addDays = function(days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
-}
-
-const differenceDays = (date1, date2) => {
-    let difference = date2.getTime() - date1.getTime();
-    return difference / (1000 * 3600 * 24);
-}
+};
 
 export { handleSubmit, init }

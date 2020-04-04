@@ -36,7 +36,7 @@ app.listen(8081, function () {
 });
 
 //handle the recieved data from geo names API
-app.post('/addGeoNamesData', addGeoNamesData);
+app.post('/addTripData', addTripData);
 //GET request returns the project data
 app.get('/tripData', getTripData);
 
@@ -47,7 +47,7 @@ function getTripData(req, res) {
 }
 
 //store project data to server
-function addGeoNamesData(req, res) {
+function addTripData(req, res) {
     projectData = req.body;
     console.log(projectData);
 }
