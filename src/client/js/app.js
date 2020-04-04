@@ -138,6 +138,7 @@ const handleSubmit = event => {
                                 tripDate: wData.data[wData.data.length - 1].valid_date,
                                 imageUrl: pData.hits[0] ? pData.hits[0].webformatURL : null
                             }; 
+                            localStorage.setItem('tripData', JSON.stringify(postData));
                             postDataToServer('/addTripData', postData);
                         })                
                         //update ui
@@ -199,6 +200,11 @@ const init = () => {
     dateInput.setAttribute('min', getCurrentDate());
     //set max date value for today (weather api has only 16day forecast)
     dateInput.setAttribute('max', getCurrentDate(16));
+
+    let tripData = localStorage.getItem('tripData');
+    if(tripData) {
+        updateUI(JSON.parse(tripData));
+    }
 };
 
 //add a method addDays for Date prototype
