@@ -17,7 +17,8 @@
         <!-- user input -->
         <section>
             <form>
-                <input id="userText" type="text" name="input" placeholder="Enter your text to classify" required>
+                <input id="cityName" type="text" name="input" placeholder="Enter your destination city" required>
+                <input id="tripDate" type="date" name="input" placeholder="Enter your trip date" required>
                 <input type="submit" name="submit" id="submitForm" value="Submit">
             </form>
             <div id="errorMessage" class="hidden"></div>
@@ -25,7 +26,11 @@
 
         <!-- result for the user-->
         <section>
-
+            <div id="city"></div>
+            <div id="country"></div>
+            <div id="date"></div>
+            <img id="tripImage" src="" width="300" />
+            <div id="obj"></div>
         </section>
     </main>
 

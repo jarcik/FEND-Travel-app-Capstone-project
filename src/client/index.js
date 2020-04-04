@@ -1,17 +1,11 @@
 //JS
-import { handleSubmit } from './js/app.js';
+import { handleSubmit, init } from './js/app.js';
 
 //CSS
 import './styles/style.scss';
 
 //export
-export { handleSubmit }
+export { handleSubmit, init }
 
 //init the application - listeners
 init();
-
-//initializaton of the app - listeners
-function init(){
-    //listener for the submit button of the form
-    document.getElementById('submitForm').addEventListener('click', handleSubmit);
-}
