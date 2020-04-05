@@ -217,4 +217,4 @@ Date.prototype.addDays = function(days) {
     return date;
 };
 
-export { handleSubmit, init }
+export { handleSubmit, init, getGeoNames, getPixabay }

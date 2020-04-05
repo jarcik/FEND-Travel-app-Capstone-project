@@ -11,7 +11,7 @@ describe('Check getCurrentDate', () => {
             return date;
         };
 
-        expect(getCurrentDate()).toEqual('2020-04-04');
+        expect(getCurrentDate()).toEqual('2020-04-05');
     });
     test('add 5', () => {
         
@@ -22,7 +22,7 @@ describe('Check getCurrentDate', () => {
             return date;
         };
 
-        expect(getCurrentDate(5)).toEqual('2020-04-09');
+        expect(getCurrentDate(5)).toEqual('2020-04-10');
     });
 });
 

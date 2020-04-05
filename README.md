@@ -26,3 +26,6 @@ By default the server uses 8081 port and webpack-dev-server uses 8080 port.
 # Additional Tasks
 - Add weather forecast icons
 - Using Local storage to safe data for use's future return
+
+# Testing
+Project uses Jest for testing. Be aware, there some tests for date to text so update the test via the current date.
