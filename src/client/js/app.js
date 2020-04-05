@@ -65,13 +65,13 @@ const getPixabay = async (cityCountry) => {
 //post recieved and user data to server
 const postDataToServer = async (url = '', data = {}) => {
     //body of the response
-    const response = await fetch(getEnvLocalUrl()+url, {
+    const response = await fetch(getEnvLocalUrl() + url, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)   
+        body: JSON.stringify(data)
     });
 
     try {
@@ -102,15 +102,15 @@ const handleSubmit = event => {
     //how many days from now is trip?
     //plus one because weather count even today
     let howManyDays = Math.round(differenceDays(new Date(), new Date(tripDate))) + 1;
-    if(howManyDays == 0) howManyDays++;
+    if (howManyDays == 0) howManyDays++;
     console.log(howManyDays);
 
     //check for empty inputs
-    if(!cityName) {
+    if (!cityName) {
         errorHandling('Fill the city name you want to travel to.');
         return;
     }
-    if(!tripDate) {
+    if (!tripDate) {
         errorHandling('Fill the date trip.');
         return;
     }
@@ -119,32 +119,32 @@ const handleSubmit = event => {
     getGeoNames(cityName)
         //get weather info
         .then(function (gData) {
-            if(gData && gData.totalResultsCount && gData.totalResultsCount > 0 && gData.geonames[0]){
+            if (gData && gData.totalResultsCount && gData.totalResultsCount > 0 && gData.geonames[0]) {
                 getWeatherBit(howManyDays, gData.geonames[0].lat, gData.geonames[0].lng)
-                .then(function (wData) {
-                    if(wData && wData.data) {
-                        getPixabay(gData.geonames[0].name + '+' + gData.geonames[0].countryName)
-                        //post data to server
-                        .then(function (pData) {     
-                            let postData = {
-                                latitude: wData.lat,
-                                longitude: wData.lon,
-                                cityName: gData.geonames[0].name,
-                                country: gData.geonames[0].countryName,                        
-                                max_temp: wData.data[wData.data.length - 1].max_temp,
-                                min_temp: wData.data[wData.data.length - 1].min_temp,
-                                weatherDesc: wData.data[wData.data.length - 1].weather.description,
-                                weatherIcon: wData.data[wData.data.length - 1].weather.icon,
-                                tripDate: wData.data[wData.data.length - 1].valid_date,
-                                imageUrl: pData.hits[0] ? pData.hits[0].webformatURL : null
-                            }; 
-                            localStorage.setItem('tripData', JSON.stringify(postData));
-                            postDataToServer('/addTripData', postData);
-                        })                
-                        //update ui
-                        .then(updateUI);
-                    }
-                })
+                    .then(function (wData) {
+                        if (wData && wData.data) {
+                            getPixabay(gData.geonames[0].name + '+' + gData.geonames[0].countryName)
+                                //post data to server
+                                .then(function (pData) {
+                                    let postData = {
+                                        latitude: wData.lat,
+                                        longitude: wData.lon,
+                                        cityName: gData.geonames[0].name,
+                                        country: gData.geonames[0].countryName,
+                                        max_temp: wData.data[wData.data.length - 1].max_temp,
+                                        min_temp: wData.data[wData.data.length - 1].min_temp,
+                                        weatherDesc: wData.data[wData.data.length - 1].weather.description,
+                                        weatherIcon: wData.data[wData.data.length - 1].weather.icon,
+                                        tripDate: wData.data[wData.data.length - 1].valid_date,
+                                        imageUrl: pData.hits[0] ? pData.hits[0].webformatURL : null
+                                    };
+                                    localStorage.setItem('tripData', JSON.stringify(postData));
+                                    postDataToServer('/addTripData', postData);
+                                })
+                                //update ui
+                                .then(updateUI);
+                        }
+                    })
             }
             else errorHandling('Sorry, not found your city. Please enter different one');
         })
@@ -163,18 +163,18 @@ const updateUI = async () => {
         console.log('update UI error: ', error);
         errorHandling('There was and error. Please, try it again.');
     }
-};   
+};
 
 //fill the UI with the data
-const fillUI = (allData) => {    
+const fillUI = (allData) => {
     //fill the UI with user data
     document.getElementById('tripCard').classList.remove('hidden');
 
     //image
-    if(allData.imageUrl) {
+    if (allData.imageUrl) {
         document.getElementById('tripImage').setAttribute('src', allData.imageUrl);
         document.getElementById('tripImage').classList.remove('hidden');
-    } else {            
+    } else {
         document.getElementById('tripImage').classList.add('hidden');
     }
     //heading of the trip
@@ -205,13 +205,13 @@ const init = () => {
 
     //get data from local storage
     let tripData = localStorage.getItem('tripData');
-    if(tripData) {
+    if (tripData) {
         fillUI(JSON.parse(tripData));
     }
 };
 
 //add a method addDays for Date prototype
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;

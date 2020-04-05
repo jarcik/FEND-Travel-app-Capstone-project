@@ -14,7 +14,7 @@ const weatherBitApiUrl = (day, lat, lon) => {
     const dayPart = '&days=';
     const latPart = '&lat=';
     const lonPart = '&lon=';
-    
+
     return baseUrl + urlParts + dayPart + day + latPart + lat + lonPart + lon;
 };
 

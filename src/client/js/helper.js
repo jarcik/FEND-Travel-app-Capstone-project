@@ -1,6 +1,6 @@
 //if webpack-dev-server is runnig, navigate to localhost 8081
 const getEnvLocalUrl = () => {
-    if(process.env.NODE_ENV == 'development') {
+    if (process.env.NODE_ENV == 'development') {
         return 'http://localhost:8081';
     }
     return '';
@@ -16,16 +16,16 @@ const differenceDays = (date1, date2) => {
 const getCurrentDate = (addDate = 0) => {
     let newDate = new Date().addDays(addDate);
     let month = newDate.getMonth();
-    if(month < 10) {
-        month = `0${month+1}`;
+    if (month < 10) {
+        month = `0${month + 1}`;
     } else month++;
     let date = newDate.getDate();
-    if(date < 10) date = `0${date}`;
+    if (date < 10) date = `0${date}`;
     return `${newDate.getFullYear()}-${month}-${date}`;
 };
 
 //hide potencially visible error message
-const hideErrorMessage = () => {    
+const hideErrorMessage = () => {
     let errorElement = document.getElementById('errorMessage');
     errorElement.innerHTML = '';
     errorElement.style.display = 'none';
