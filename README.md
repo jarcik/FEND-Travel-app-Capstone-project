@@ -11,6 +11,8 @@ Final project of the FEND nanodegree. Uses node, express server, body parser, co
 - jest
 - workbox
 
+See package.json
+
 # How to run project
 1. Clone the repo
 2. In repo folder run 'npm install'

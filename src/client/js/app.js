@@ -158,31 +158,33 @@ const updateUI = async () => {
         //wait for all data from server
         const allData = await request.json();
         console.log(allData);
-
-        //fill the UI with user data
-
-        document.getElementById('tripCard').classList.remove('hidden');
-
-        //image
-        if(allData.imageUrl) {
-            document.getElementById('tripImage').setAttribute('src', allData.imageUrl);
-            document.getElementById('tripImage').classList.remove('hidden');
-        } else {            
-            document.getElementById('tripImage').classList.add('hidden');
-        }
-        //heading of the trip
-        document.getElementById('tripHeading').innerHTML = `Travel to: ${allData.cityName}, ${allData.country}`;
-        document.getElementById('departureDate').innerHTML = `Departure date: ${allData.tripDate}`;
-        document.getElementById('tempHigh').innerHTML = `Temperature high: ${allData.max_temp}`;
-        document.getElementById('tempLow').innerHTML = `Temperature low: ${allData.min_temp}`;
-        document.getElementById('weatherIcon').setAttribute('src', `https://www.weatherbit.io/static/img/icons/${allData.weatherIcon}.png`);
-        document.getElementById('weatherText').innerHTML = `${allData.weatherDesc}`;
-
+        fillUI(allData)
     } catch (error) {
         console.log('update UI error: ', error);
         errorHandling('There was and error. Please, try it again.');
     }
 };   
+
+//fill the UI with the data
+const fillUI = (allData) => {    
+    //fill the UI with user data
+    document.getElementById('tripCard').classList.remove('hidden');
+
+    //image
+    if(allData.imageUrl) {
+        document.getElementById('tripImage').setAttribute('src', allData.imageUrl);
+        document.getElementById('tripImage').classList.remove('hidden');
+    } else {            
+        document.getElementById('tripImage').classList.add('hidden');
+    }
+    //heading of the trip
+    document.getElementById('tripHeading').innerHTML = `Travel to: ${allData.cityName}, ${allData.country}`;
+    document.getElementById('departureDate').innerHTML = `Departure date: ${allData.tripDate}`;
+    document.getElementById('tempHigh').innerHTML = `Temperature high: ${allData.max_temp}`;
+    document.getElementById('tempLow').innerHTML = `Temperature low: ${allData.min_temp}`;
+    document.getElementById('weatherIcon').setAttribute('src', `https://www.weatherbit.io/static/img/icons/${allData.weatherIcon}.png`);
+    document.getElementById('weatherText').innerHTML = `${allData.weatherDesc}`;
+};
 
 //initializaton of the app - listeners
 const init = () => {
@@ -204,7 +206,7 @@ const init = () => {
     //get data from local storage
     let tripData = localStorage.getItem('tripData');
     if(tripData) {
-        updateUI(JSON.parse(tripData));
+        fillUI(JSON.parse(tripData));
     }
 };
 
