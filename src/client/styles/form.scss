@@ -1,5 +1,6 @@
 $border_width: 5px;
 $border_color: #f05e23;
+$hover_state: #FFC300;
 
 input {
     width: 200px;
@@ -19,6 +20,11 @@ input {
     height: 83px;
     background-color: $border_color;
     font-weight: bold;
+
+    &:hover {
+        font-size: 22px;
+        background-color: $hover_state;
+    }
 }
 
 #errorMessage {
